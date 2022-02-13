@@ -1,0 +1,11 @@
+const PASTEL_PUPPLE = "#D9D7F1";
+const PASTEL_YELLOW = "#FFFDDE";
+const PASTEL_GREEN = "#E7FBBE";
+const PASTEL_PINK = "#FFCBCB";
+
+export {
+    PASTEL_GREEN,
+    PASTEL_PINK,
+    PASTEL_YELLOW,
+    PASTEL_PUPPLE,
+}
