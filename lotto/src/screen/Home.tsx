@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {SafeAreaView, View, Alert, Text, StyleSheet, TextInput, Button, BackHandler} from "react-native";
-import {PASTEL_PUPPLE, PASTEL_YELLOW, PASTEL_PINK, PASTEL_GREEN} from "../common/color";
+import { SafeAreaView, View, Alert, Text, StyleSheet, TextInput, Button, BackHandler } from "react-native";
+import { PASTEL_PUPPLE, PASTEL_YELLOW, PASTEL_PINK } from "../common/color";
 import { Ball } from "../components/ball";
 
 export const Home = () => {
