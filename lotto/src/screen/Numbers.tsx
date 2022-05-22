@@ -52,7 +52,7 @@ export const Numbers = ({navigation}) => {
                     return (
                         <View key={index} style={styles.otherLotto}>
                             {[...list].map((number, index) => {
-                                return <Ball key={index} number={number} ballColor={MAKER_WHITE}/>
+                                return <Ball key={index} number={number} ballColor={MAKER_WHITE} fontColor={MAKER_PUPPLE}/>
                             })}
                         </View>
                     )
