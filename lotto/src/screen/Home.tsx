@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Alert, Text, StyleSheet, TextInput, Button, BackHandler } from "react-native";
-import { PASTEL_PUPPLE, PASTEL_YELLOW, PASTEL_PINK } from "../common/color";
-import { Ball } from "../components/ball";
+import { SafeAreaView, View, Alert, StyleSheet, ImageBackground, TextInput, BackHandler, TouchableOpacity } from "react-native";
+import { MAKER_BLACK, MAKER_PUPPLE, MAKER_WHITE, MAKER_GREY } from "../common/color";
+import { LottoText } from "../components/lottoText";
+import { useSetRecoilState } from "recoil";
+import { DreamState, RandomState } from "../states";
 
-export const Home = () => {
+
+export const Home = ({navigation}) => {
     const [ dream, setDream ] = useState("");
-    const [ flag, setFlag ] = useState(false);
-    const [ lotto, setLotto ] = useState([]);
-    const [ random, setRandom ] = useState([]);
     const [ dataSum, setDateSum ] = useState(0);
+    const [ date, getData ] = useState(new Date());
+    const setDreamState = useSetRecoilState(DreamState);
+    const setRandomState = useSetRecoilState(RandomState);
     
     const sortArray = (array) => {
         return array.sort((a, b) => a - b);
@@ -49,8 +52,7 @@ export const Home = () => {
         let randomArrays = [];
         if(joinText.length <= 0) {
             randomArrays = randomGenerateLotto(5);
-            setFlag(false);
-            setRandom(randomArrays);
+            setRandomState(randomArrays);
         } else {
             randomArrays = randomGenerateLotto(4);    
             let total:number = 0;
@@ -64,9 +66,9 @@ export const Home = () => {
             }
             dreamArray = setNumberGenerator(dreamArray, dataSum);
 
-            setLotto(dreamArray);
-            setRandom(randomArrays);
-            setFlag(true);
+            setDreamState(dreamArray);
+            setRandomState(randomArrays);
+            navigation.push("Loader");
         }
     }
 
@@ -83,8 +85,8 @@ export const Home = () => {
     }
     
     useEffect(() => {
-        // BackHandler.addEventListener("hardwareBackPress", backAction)
-        // return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
+        BackHandler.addEventListener("hardwareBackPress", backAction)
+        return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, [])
 
     useEffect(() => {
@@ -95,60 +97,46 @@ export const Home = () => {
         sum += date.getDate();
         setDateSum(sum);
     }, [])
-
     return (
         <SafeAreaView style={styles.background}>
             <View style={styles.titleContainer}>
-                <Text style={styles.mainTitle}>
+                <LottoText fontWeight="bold" fontSize={28} fontColor={MAKER_BLACK} textStyle={{marginBottom: 10}}>
                     어떤 꿈을 꾸셨나요?
-                </Text>
-                <TextInput
-                    style={styles.dreamInput}
-                    onChangeText={setDream}
-                    value={dream}
-                    placeholder="자세할수록 확률이 올라갑니다."
-                />
-                <Button 
-                    color={PASTEL_PUPPLE}
-                    title="추출하기"
-                    onPress={onGenerateLotto} 
-                />
-                {flag ?
-                <View>
-                    <Text style={styles.lottoTitle}> 꿈자리 로또 번호</Text>
-                    <View style={styles.dreamLotto}>
-                        {lotto.map((number, index) => {
-                            return <Ball key={index} number={number}/>
-                        })}
-                    </View>
-                    <Text style={styles.lottoTitle} >랜덤 번호</Text>
-                    <View style={styles.otherLottoList}>
-                        {random.map((list, index)=> {
-                            return (
-                                <View key={index} style={styles.otherLotto}>
-                                    {[...list].map((number, index) => {
-                                        return <Ball key={index} number={number} />
-                                    })}
-                                </View>
-                            )
-                        })}
-                    </View>
-                </View>    
-                :
-                <>
-                    {random.length ? <Text style={styles.lottoTitle} >랜덤 번호</Text>: <></>}
-                    <View style={styles.otherLottoList}>
-                        {random.map((list, index)=> {
-                            return (
-                                <View key={index} style={styles.otherLotto}>
-                                    {[...list].map((number, index) => {
-                                        return <Ball key={index} number={number} />
-                                    })}
-                                </View>
-                            )
-                        })}
-                    </View>
-                </>
+                </LottoText>
+                <LottoText fontWeight="normal" fontSize={16} fontColor={MAKER_BLACK}>
+                    오늘의 꿈을 기록해보세요.
+                </LottoText>
+                <LottoText fontWeight="normal" fontSize={16} fontColor={MAKER_BLACK}>
+                    때로는 꿈이 행운을 가져다 준답니다.🔮
+                </LottoText>
+                <ImageBackground style={{flex:1, marginTop:35,marginBottom:35, padding: 25}} source={require("../images/background_note.png")}>
+                    <LottoText fontSize={25} fontWeight={"100"} fontColor={MAKER_BLACK}>{`${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}.`}</LottoText>
+                    <TextInput
+                        style={styles.dreamInput}
+                        numberOfLines={100}
+                        multiline={true}
+                        onChangeText={setDream}
+                        value={dream}
+                        textAlignVertical={"top"}
+                        autoCorrect={false}
+                        spellCheck={false}
+                        selectionColor={MAKER_PUPPLE}
+                        placeholder="자세할수록 행운 확률은 올라갑니다 :)"
+                        placeHolderColor={MAKER_GREY}
+                    />
+                </ImageBackground>
+                {dream.length 
+                ?   <TouchableOpacity
+                        style={styles.trueButton}
+                        onPress={onGenerateLotto} 
+                    >
+                        <LottoText fontSize={16} fontWeight={"700"} fontColor={MAKER_WHITE}>로또 번호 생성하기</LottoText>
+                    </TouchableOpacity>
+                :   <TouchableOpacity
+                        style={styles.falseButton} 
+                    >
+                    <LottoText fontSize={16} fontWeight={"700"} fontColor={MAKER_PUPPLE}>로또 번호 생성하기</LottoText>
+                    </TouchableOpacity>
                 }
             </View>
         </SafeAreaView>
@@ -157,7 +145,10 @@ export const Home = () => {
 
 const styles = StyleSheet.create({
     background: {
+        backgroundColor: "white",
         flex: 1,
+        paddingTop:44,
+        paddingBottom:44,
     },
     mainTitle: {
         fontSize: 25
@@ -167,29 +158,31 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     dreamInput: {
-        borderColor: "black",
-        borderRadius:10,
-        borderWidth: 1,
         margin: 10,
-    },
-    dreamLotto: {
-        backgroundColor: PASTEL_YELLOW,
-        flexDirection: "row",
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius: 20,
-    },
-    otherLottoList: {
-        backgroundColor: PASTEL_PINK,
-        borderRadius: 20,
-    },
-    otherLotto: {
-        flexDirection: "row",
-        alignItems:"center",
-        justifyContent:"center",
+        overflow: "scroll",
+        textDecorationLine: 'underline',
+        fontSize: 15,
     },
     lottoTitle: {
         fontSize:20,
         margin:10,
+    },
+    trueButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height:60,
+        backgroundColor: MAKER_PUPPLE,
+        borderColor: MAKER_PUPPLE,
+        borderRadius: 10,
+        color: MAKER_WHITE,
+    },
+    falseButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height:60,
+        borderWidth: 1,
+        borderColor: MAKER_PUPPLE,
+        borderRadius: 10,
+        color: MAKER_WHITE,
     }
 })

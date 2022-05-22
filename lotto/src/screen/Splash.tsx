@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
-import { MAKER_WHITE } from "../common/color";
+import { View, SafeAreaView, StyleSheet, ImageBackground } from 'react-native';
+import { MAKER_PUPPLE, MAKER_WHITE } from "../common/color";
 import { LottoText } from "../components/lottoText";
 
 export const Splash = ({navigation}) => {
 
     const nextScreen = () => {
         setTimeout(() => {
-            navigation.navigate("Home");
-        }, 1000);
+            navigation.push("Home");
+        }, 1500);
     }
 
     useEffect(() => {
@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: "solid",
         borderColor: "rgba(255, 255, 255, 0.3)"
-    }
+    },
 })
