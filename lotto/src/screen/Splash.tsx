@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, Text, StyleSheet} from 'react-native';
-import {PASTEL_PUPPLE, PASTEL_YELLOW, PASTEL_PINK} from "../common/color";
+import { View, SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
+import { MAKER_WHITE } from "../common/color";
+import { LottoText } from "../components/lottoText";
 
 export const Splash = ({navigation}) => {
 
@@ -15,13 +16,21 @@ export const Splash = ({navigation}) => {
     })
     return (
         <SafeAreaView style={{flex: 1}}>
+            <ImageBackground style={styles.image} source={require("../images/background_splash.png")}>
+                <View style={{flex: 1, backgroundColor: 'rgba(38, 1, 145, 0.3)',}}></View>
+            </ImageBackground>
             <View style={styles.splashContainer}>
-                <Text style={styles.subTitle}>
-                    꿈자리 로또번호 추출기
-                </Text>
-                <Text style={styles.mainTitle}>
-                    드림로또
-                </Text>
+                <LottoText fontColor={MAKER_WHITE} fontSize={28} fontWeight={"bold"} textStyle={{margin:20}}>
+                    좋은 꿈, 꾸셨어요?
+                </LottoText>
+                <View style={styles.titleContainer}>
+                    <LottoText fontColor={MAKER_WHITE} fontSize={21} fontWeight={"bold"}>
+                    꿈을 담는 로또 번호 추첨앱
+                    </LottoText>
+                    <LottoText fontColor={MAKER_WHITE} fontSize={34} fontWeight={"bold"} textStyle={{opacity: 0.5}}>
+                        Dream Lotto
+                    </LottoText>
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -32,13 +41,19 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems:"center",
-        // backgroundColor: PASTEL_PUPPLE,
     },
-    mainTitle: {
-        fontSize: 40,
-        color: PASTEL_PINK
+    image: {
+        width: "100%",
+        height: "100%",
+        position: "absolute",
     },
-    subTitle: {
-
+    titleContainer: {
+        width: "70%",
+        height:"50%",
+        padding:16,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "rgba(255, 255, 255, 0.3)"
     }
 })

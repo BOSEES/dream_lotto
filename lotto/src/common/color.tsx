@@ -3,9 +3,18 @@ const PASTEL_YELLOW = "#FFFDDE";
 const PASTEL_GREEN = "#E7FBBE";
 const PASTEL_PINK = "#FFCBCB";
 
+const MAKER_WHITE = "#ffffff";
+const MAKER_PUPPLE = "#4618A8";
+const MAKER_GREY = "#a1a1a1";
+const MAKER_BLACK = "#222222";
+
 export {
     PASTEL_GREEN,
     PASTEL_PINK,
     PASTEL_YELLOW,
     PASTEL_PUPPLE,
+    MAKER_BLACK,
+    MAKER_GREY,
+    MAKER_PUPPLE,
+    MAKER_WHITE
 }

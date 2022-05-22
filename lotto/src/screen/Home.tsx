@@ -83,8 +83,8 @@ export const Home = () => {
     }
     
     useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", backAction)
-        return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
+        // BackHandler.addEventListener("hardwareBackPress", backAction)
+        // return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, [])
 
     useEffect(() => {
