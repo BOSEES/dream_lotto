@@ -68,7 +68,8 @@ export const Home = ({navigation}) => {
 
             setDreamState(dreamArray);
             setRandomState(randomArrays);
-            navigation.push("Loader");
+            // navigation.push("Loader");
+            navigation.push("ScreenAdd");
         }
     }
 

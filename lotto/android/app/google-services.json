@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816757610771",
+    "project_id": "dreamlotto-2de45",
+    "storage_bucket": "dreamlotto-2de45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816757610771:android:96beb5335cbd38601962e6",
+        "android_client_info": {
+          "package_name": "com.lotto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816757610771-8tle2h7g15uc4o6qgnkj73nf6bngqnnu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrK4HAvquN3Tm-AkzeFoQOOavsPiTR838"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816757610771-8tle2h7g15uc4o6qgnkj73nf6bngqnnu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
