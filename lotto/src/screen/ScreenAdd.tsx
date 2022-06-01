@@ -6,11 +6,13 @@ import {
     TestIds,
 } from '@react-native-firebase/admob';
 
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : "ca-app-pub-3631838016747350~9815427990"
+
 export const ScreenAdd = ({ navigation }) => {
   // ad
     useEffect(() => {
         const interstitialAd = InterstitialAd.createForAdRequest(
-        TestIds.INTERSTITIAL,
+        adUnitId,
         );
         interstitialAd.onAdEvent((type, error) => {
         console.log('New advert event: ', type);
